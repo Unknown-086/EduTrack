@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Management - EduTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>EduTrack</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="students.html">Students</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="enrollments.html" class="active">Enrollments</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <h2>Enrollment Management</h2>
+                <p>Keep every cohort synchronized with precise enrollment data and intelligent filters.</p>
+            </header>
+
+            <section class="panel form-panel">
+                <div class="panel__header">
+                    <div>
+                        <h3 class="panel__title">Enroll Student in Course</h3>
+                        <p class="panel__subtitle">Pair active students with available courses in a few clicks.</p>
+                    </div>
+                </div>
+                <form id="enrollment-form">
+                    <div class="form-grid form-grid--two">
+                        <div class="form-group">
+                            <label for="enrollment-student">Select Student *</label>
+                            <select id="enrollment-student" required>
+                                <option value="">-- Choose Student --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="enrollment-course">Select Course *</label>
+                            <select id="enrollment-course" required>
+                                <option value="">-- Choose Course --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enroll Student</button>
+                    </div>
+                </form>
+                <div id="enrollment-form-message" class="message" role="status"></div>
+            </section>
+
+            <section class="panel filter-section">
+                <div class="panel__header">
+                    <div>
+                        <h3 class="panel__title">Filter Enrollments</h3>
+                        <p class="panel__subtitle">Drill into specific students or courses without losing context.</p>
+                    </div>
+                </div>
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="filter-student">By Student</label>
+                        <select id="filter-student">
+                            <option value="">-- All Students --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-course">By Course</label>
+                        <select id="filter-course">
+                            <option value="">-- All Courses --</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-secondary" id="filter-btn">Apply Filter</button>
+                        <button class="btn btn-secondary" id="reset-filter-btn">Reset</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel list-section">
+                <div class="panel__header">
+                    <div>
+                        <h3 class="panel__title">All Enrollments</h3>
+                        <p class="panel__subtitle">Track enrollment requests, status changes, and course capacity.</p>
+                    </div>
+                    <div class="panel__actions">
+                        <button class="btn btn-secondary" id="refresh-enrollments-btn">Refresh</button>
+                    </div>
+                </div>
+                <div id="loading" class="loading">Loading enrollments...</div>
+                <div id="enrollments-list" class="card-list"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EduTrack - Cloud-native education management</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/enrollments.js"></script>
+</body>
+</html>

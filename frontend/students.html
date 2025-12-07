@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management - EduTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>EduTrack</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="students.html" class="active">Students</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="enrollments.html">Enrollments</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <h2>Student Management</h2>
+                <p>Capture every student detail with precision and keep the entire academic journey aligned.</p>
+            </header>
+
+            <section class="panel form-panel">
+                <div class="panel__header">
+                    <div>
+                        <h3 id="form-title" class="panel__title">Register New Student</h3>
+                        <p class="panel__subtitle">Use the form below to create or update student profiles.</p>
+                    </div>
+                </div>
+                <form id="student-form">
+                    <input type="hidden" id="student-id">
+                    <div class="form-grid form-grid--two">
+                        <div class="form-group">
+                            <label for="student-name">Name *</label>
+                            <input type="text" id="student-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-email">Email *</label>
+                            <input type="email" id="student-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-phone">Phone</label>
+                            <input type="tel" id="student-phone" placeholder="+92-300-1234567">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">Register Student</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-btn" style="display:none;">Cancel</button>
+                    </div>
+                </form>
+                <div id="form-message" class="message" role="status"></div>
+            </section>
+
+            <section class="panel list-section">
+                <div class="panel__header">
+                    <div>
+                        <h3 class="panel__title">All Students</h3>
+                        <p class="panel__subtitle">Review and maintain the latest roster across cohorts.</p>
+                    </div>
+                    <div class="panel__actions">
+                        <button class="btn btn-secondary" id="refresh-btn">Refresh</button>
+                    </div>
+                </div>
+                <div id="loading" class="loading">Loading students...</div>
+                <div id="students-list" class="card-list"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EduTrack - Cloud-native education management</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/students.js"></script>
+</body>
+</html>

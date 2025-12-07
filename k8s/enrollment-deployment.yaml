@@ -1,0 +1,102 @@
+# Enrollment Service Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enrollment-service
+  labels:
+    app: enrollment-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: enrollment-service
+  template:
+    metadata:
+      labels:
+        app: enrollment-service
+    spec:
+      containers:
+      # Main application container
+      - name: enrollment-service
+        image: us-central1-docker.pkg.dev/cloud-assignment-2-480010/edutrack-repo/enrollment-service:v1
+        ports:
+        - containerPort: 8083
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: edutrack-db-secret
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: edutrack-db-secret
+              key: DB_PORT
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: edutrack-db-secret
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: edutrack-db-secret
+              key: DB_PASSWORD
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: edutrack-db-secret
+              key: DB_NAME
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8083
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8083
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      - name: cloudsql-proxy
+        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.11.4
+        args:
+        - "--port=5432"
+        - "--address=0.0.0.0"
+        - "cloud-assignment-2-480010:us-central1:edutrack-db"
+        securityContext:
+          runAsNonRoot: true
+        volumeMounts:
+        - name: cloudsql-instance-credentials
+          mountPath: /secrets
+          readOnly: true
+
+      volumes:
+      - name: cloudsql-instance-credentials
+        secret:
+          secretName: cloudsql-instance-credentials
+
+---
+# Enrollment Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: enrollment-service
+  labels:
+    app: enrollment-service
+spec:
+  type: ClusterIP  # Use ClusterIP for internal access via Ingress
+  ports:
+  - port: 8083
+    targetPort: 8083
+    protocol: TCP
+  selector:
+    app: enrollment-service
