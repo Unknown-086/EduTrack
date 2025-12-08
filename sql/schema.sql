@@ -69,9 +69,9 @@ CREATE INDEX idx_admins_username ON admins(username);
 
 -- Insert sample data (optional - for testing)
 INSERT INTO students (name, email, phone) VALUES 
-('John Doe', 'john.doe@example.com', '+92-300-1234567'),
-('Jane Smith', 'jane.smith@example.com', '+92-301-2345678'),
-('Ali Khan', 'ali.khan@example.com', '+92-302-3456789');
+('User 1', 'user1@gmail.com', '+92-300-1234567'),
+('User 2', 'user2@gmail.com', '+92-301-2345678'),
+('User 3', 'user3@gmail.com', '+92-302-3456789');
 
 INSERT INTO courses (course_code, course_name, description, credits, instructor, max_capacity, status) VALUES 
 ('CS101', 'Introduction to Programming', 'Learn the basics of programming using Python', 3, 'Dr. Ahmad', 50, 'active'),

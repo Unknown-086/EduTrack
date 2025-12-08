@@ -6,7 +6,7 @@ metadata:
   labels:
     app: course-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: course-service
@@ -71,6 +71,7 @@ spec:
         args:
         - "--port=5432"
         - "--address=0.0.0.0"
+        - "--credentials-file=/secrets/key.json"
         - "cloud-assignment-2-480010:us-central1:edutrack-db"
         securityContext:
           runAsNonRoot: true
